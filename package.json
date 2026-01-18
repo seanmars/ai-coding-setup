@@ -1,0 +1,12 @@
+{
+	"name": "ai-coding-setup",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "main.js",
+	"scripts": {
+		"start": "zx main.js"
+	},
+	"dependencies": {
+		"zx": "^8.8.5"
+	}
+}

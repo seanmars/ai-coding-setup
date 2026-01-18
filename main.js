@@ -1,0 +1,23 @@
+import { useBash, usePwsh } from 'zx';
+import { ensureClaudePluginsOfficial } from './scripts/claudePluginsOfficial.js';
+import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
+
+(async () => {
+  console.log('Starting setup...');
+  if (process.platform === 'win32') {
+    usePwsh();
+  } else {
+    useBash();
+  }
+
+  try {
+    await ensureClaudePluginsOfficial();
+    await ensureSuperpowersMarketplace();
+
+    console.log('Setup completed successfully.');
+  } catch (error) {
+    console.error('Error executing command:', error);
+  } finally {
+    // Cleanup or final steps can be added here if necessary
+  }
+})();
