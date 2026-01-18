@@ -1,5 +1,6 @@
 import { useBash, usePwsh } from 'zx';
 import { ensureClaudePluginsOfficial } from './scripts/claudePluginsOfficial.js';
+import { ensureOpenSpec } from './scripts/openSpec.js';
 import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
 
 (async () => {
@@ -12,6 +13,7 @@ import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
 
   try {
     await ensureClaudePluginsOfficial();
+    await ensureOpenSpec();
     await ensureSuperpowersMarketplace();
 
     console.log('Setup completed successfully.');
