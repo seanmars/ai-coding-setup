@@ -2,6 +2,7 @@ import { useBash, usePwsh } from 'zx';
 import { ensureClaudePluginsOfficial } from './scripts/claudePluginsOfficial.js';
 import { ensureOpenSpec } from './scripts/openSpec.js';
 import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
+import { install3rdPartyCommandTools } from './scripts/install3rd.js';
 
 (async () => {
   console.log('Starting setup...');
@@ -12,9 +13,10 @@ import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
   }
 
   try {
-    await ensureClaudePluginsOfficial();
-    await ensureOpenSpec();
-    await ensureSuperpowersMarketplace();
+    // await ensureClaudePluginsOfficial();
+    // await ensureOpenSpec();
+    // await ensureSuperpowersMarketplace();
+    await install3rdPartyCommandTools();
 
     console.log('Setup completed successfully.');
   } catch (error) {
