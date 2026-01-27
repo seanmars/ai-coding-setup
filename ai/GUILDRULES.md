@@ -19,6 +19,15 @@
 ## Important Reminders
 
 **NEVER**:
+- IMPORTANT: DO NOT USEING 全形符號, 永遠使用半形符號. ex:
+  - "，" should be ","
+  - "。" should be "."
+  - "；" should be ";"
+  - "：" should be ":"
+  - "！" should be "!"
+  - "？" should be "?"
+  - "（" should be "("
+  - "）" should be ")"
 - Use `--no-verify` to bypass commit hooks
 - Disable tests instead of fixing them
 - Commit code that doesn't compile
