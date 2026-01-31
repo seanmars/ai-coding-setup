@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run ./os-notify/main.py --title 'Claude' --message ''"
+          }
+        ]
+      }
+    ]
+  }
+}

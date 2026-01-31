@@ -13,9 +13,9 @@ import { install3rdPartyCommandTools } from './scripts/install3rd.js';
   }
 
   try {
-    // await ensureClaudePluginsOfficial();
-    // await ensureOpenSpec();
-    // await ensureSuperpowersMarketplace();
+    await ensureClaudePluginsOfficial();
+    await ensureOpenSpec();
+    await ensureSuperpowersMarketplace();
     await install3rdPartyCommandTools();
 
     console.log('Setup completed successfully.');
