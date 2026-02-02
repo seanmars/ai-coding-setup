@@ -6,13 +6,10 @@ import path from 'node:path';
 import os from 'node:os';
 
 const DEFAULT_REPO_URL =
-  'https://github.com/anthropics/claude-plugins-official';
-const DEFAULT_MARKETPLACE = 'claude-plugins-official';
+  'https://github.com/anthropics/claude-code.git';
+const DEFAULT_MARKETPLACE = 'claude-code-plugins';
 const WANTED_PLUGINS = [
-  'code-simplifier',
-  'csharp-lsp',
-  'typescript-lsp',
-  'gopls-lsp',
+  'frontend-design',
 ];
 
 const defaultMarketplaceDir = path.join(
@@ -23,12 +20,12 @@ const defaultMarketplaceDir = path.join(
   DEFAULT_MARKETPLACE,
 );
 
-export async function ensureClaudePluginsOfficial({
+export async function ensureClaudePluginsCode({
   marketplaceDir = defaultMarketplaceDir,
   marketplaceName = DEFAULT_MARKETPLACE,
   repoUrl = DEFAULT_REPO_URL,
 } = {}) {
-  console.log('Setup Claude Official Plugins...');
+  console.log('Setup Claude Code Plugins...');
 
   await assertClaudeCliAvailable();
 

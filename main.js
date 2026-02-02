@@ -1,5 +1,6 @@
 import { useBash, usePwsh } from 'zx';
 import { ensureClaudePluginsOfficial } from './scripts/claudePluginsOfficial.js';
+import { ensureClaudePluginsCode } from './scripts/claudePlugin.js';
 import { ensureOpenSpec } from './scripts/openSpec.js';
 import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
 import { install3rdPartyCommandTools } from './scripts/install3rd.js';
@@ -14,6 +15,7 @@ import { install3rdPartyCommandTools } from './scripts/install3rd.js';
 
   try {
     await ensureClaudePluginsOfficial();
+    await ensureClaudePluginsCode();
     await ensureOpenSpec();
     await ensureSuperpowersMarketplace();
     await install3rdPartyCommandTools();
