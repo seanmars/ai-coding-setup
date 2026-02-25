@@ -2,9 +2,9 @@
 	"name": "ai-coding-setup",
 	"version": "1.0.0",
 	"type": "module",
-	"main": "main.js",
 	"scripts": {
-		"start": "zx main.js"
+		"setup": "zx ./scripts/setup.js",
+		"cc:update-plugin": "zx ./scripts/update-claude-plugin.js"
 	},
 	"dependencies": {
 		"zx": "^8.8.5"

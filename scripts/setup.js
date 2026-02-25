@@ -1,9 +1,9 @@
 import { useBash, usePwsh } from 'zx';
-import { ensureClaudePluginsOfficial } from './scripts/claudePluginsOfficial.js';
-import { ensureClaudePluginsCode } from './scripts/claudePlugin.js';
-import { ensureOpenSpec } from './scripts/openSpec.js';
-import { ensureSuperpowersMarketplace } from './scripts/superpowers.js';
-import { install3rdPartyCommandTools } from './scripts/install3rd.js';
+import { ensureClaudePluginsOfficial } from './claudePluginsOfficial.js';
+import { ensureClaudePluginsCode } from './claudePlugin.js';
+import { ensureOpenSpec } from './openSpec.js';
+import { ensureSuperpowersMarketplace } from './superpowers.js';
+import { install3rdPartyCommandTools } from './install3rd.js';
 
 (async () => {
   console.log('Starting setup...');
