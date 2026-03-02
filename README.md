@@ -33,7 +33,7 @@ pnpm install
 ### 執行初始化
 
 ```bash
-pnpm start
+pnpm run setup
 ```
 
 ## 相關 URLs

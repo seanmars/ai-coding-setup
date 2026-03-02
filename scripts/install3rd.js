@@ -16,7 +16,9 @@ const wingetPackages = [
 ];
 
 const npmPackages = [
-  //https://github.com/ast-grep/ast-grep
+  // https://github.com/Fission-AI/OpenSpec
+  '@fission-ai/openspec@latest',
+  // https://github.com/ast-grep/ast-grep
   '@ast-grep/cli',
 ];
 

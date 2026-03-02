@@ -9,7 +9,6 @@ const DEFAULT_REPO_URL =
   'https://github.com/anthropics/claude-plugins-official';
 const DEFAULT_MARKETPLACE = 'claude-plugins-official';
 const WANTED_PLUGINS = [
-  'code-simplifier',
   'csharp-lsp',
   'typescript-lsp',
   'gopls-lsp',
