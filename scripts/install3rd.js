@@ -11,6 +11,8 @@ const wingetPackages = [
   'sharkdp.fd',
   // https://github.com/junegunn/fzf
   'junegunn.fzf',
+  // https://github.com/mikefarah/yq
+  'MikeFarah.yq',
 ];
 
 const npmPackages = [
