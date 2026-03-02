@@ -3,8 +3,19 @@ import { $ } from 'zx';
 const isWindows = process.platform === 'win32';
 const wingetPackages = [
   'Git.Git',
+  // https://github.com/jqlang/jq
   'jqlang.jq',
-  'BurntSushi.ripgrep.MSVC'
+  // https://github.com/BurntSushi/ripgrep
+  'BurntSushi.ripgrep.MSVC',
+  // https://github.com/sharkdp/fd
+  'sharkdp.fd',
+  // https://github.com/junegunn/fzf
+  'junegunn.fzf',
+];
+
+const npmPackages = [
+  //https://github.com/ast-grep/ast-grep
+  '@ast-grep/cli',
 ];
 
 export async function install3rdPartyCommandTools() {
@@ -17,6 +28,20 @@ export async function install3rdPartyCommandTools() {
 
   for (const pkg of wingetPackages) {
     await installWinGetPackage(pkg);
+  }
+
+  for (const pkg of npmPackages) {
+    await installNpmPackage(pkg);
+  }
+}
+
+async function installNpmPackage(name) {
+  try {
+    console.log(`Installing ${name} via npm...`);
+    await $`npm install -g ${name}`;
+    console.log(`${name} installed successfully.`);
+  } catch (error) {
+    console.error(`Failed to install ${name}:`, error);
   }
 }
 
