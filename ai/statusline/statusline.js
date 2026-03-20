@@ -2,7 +2,6 @@
 
 const { execSync } = require('child_process');
 const path = require('path');
-const fs = require('fs');
 
 function getModelDisplay(input) {
   let model = 'Unknown Model';
@@ -96,6 +95,61 @@ function contextUsed(input) {
   return bar;
 }
 
+function getRateLimitDisplay(input) {
+  if (!input.rate_limits) {
+    return '';
+  }
+
+  const windows = [
+    { key: 'five_hour', label: '5h' },
+    { key: 'seven_day', label: '7d' }
+  ];
+
+  const parts = [];
+
+  for (const { key, label } of windows) {
+    const data = input.rate_limits[key];
+    if (!data) {
+      continue;
+    }
+
+    const filled = data.used_percentage || 0;
+    let circles = '';
+    const pct = Math.floor(filled / 10);
+    for (let i = 0; i < 10; i++) {
+      if (i < pct) {
+        circles += '●';
+      } else {
+        circles += (pct - i + 1 > 0.4) ? '◐' : '○';
+      }
+    }
+
+    let resetsStr = '';
+    if (data.resets_at) {
+      const resetDate = new Date(data.resets_at * 1000);
+      let opt = { hour: '2-digit', minute: '2-digit', hour12: false };
+      if (key === 'seven_day') {
+        opt = { month: '2-digit', day: '2-digit', weekday: 'short', ...opt };
+      }
+      resetsStr = ` ${resetDate.toLocaleTimeString([], opt)}`;
+    }
+
+    let color;
+    if (filled <= 33) {
+      color = '\x1b[32m'; // green
+    } else if (filled <= 66) {
+      color = '\x1b[33m'; // yellow
+    } else {
+      color = '\x1b[31m'; // red
+    }
+    const reset = '\x1b[0m';
+
+    parts.push(`${label}:${color}${circles}${reset}${resetsStr}(${filled}%)`);
+  }
+
+  return parts.join(' |');
+}
+
 // Read JSON input from stdin
 let inputData = '';
 process.stdin.on('data', chunk => inputData += chunk);
@@ -123,13 +177,14 @@ process.stdin.on('end', () => {
     // Create progress bar with color on second line
     let secondLine = contextUsed(input);
 
+    // Create rate limit display on third line
+    let thirdLine = getRateLimitDisplay(input);
 
     // Output status line
-    if (secondLine) {
-      console.log(`${firstLine}\n${secondLine}`);
-    } else {
-      console.log(firstLine);
-    }
+    let output = firstLine;
+    if (secondLine) output += `\n${secondLine}`;
+    if (thirdLine) output += `\n${thirdLine}`;
+    console.log(output);
 
   } catch (error) {
     console.error('Error:', error.message);
