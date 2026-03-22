@@ -113,7 +113,7 @@ function getRateLimitDisplay(input) {
       continue;
     }
 
-    const filled = data.used_percentage || 0;
+    const filled = Math.floor(data.used_percentage || 0);
     let circles = '';
     const pct = Math.floor(filled / 10);
     for (let i = 0; i < 10; i++) {
@@ -121,7 +121,8 @@ function getRateLimitDisplay(input) {
         circles += '●';
       } else {
         const mod = filled % 10;
-        circles += (mod > 4) ? '◐' : '○';
+        const isFilled = filled >= (i * 10);
+        circles += (isFilled && (mod > 4)) ? '◐' : '○';
       }
     }
 
