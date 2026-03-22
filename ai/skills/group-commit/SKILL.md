@@ -96,14 +96,17 @@ chore(deps): update eslint and prettier
 ── Commit 3 ─────────────────────────────────────
 docs: update README with auth setup steps
   • README.md                   (modified)
-
-Proceed? [yes / edit plan / cancel]
 ```
 
-Then wait for user confirmation. If the user says:
-- **yes / ok / go / proceed** → execute the plan
-- **edit plan / change / adjust** → ask what to adjust (merge groups, split, rename message, move a file)
-- **cancel / no** → stop, do nothing
+Then use the `AskUserQuestion` tool to ask for confirmation with these exact options:
+- `✅ Proceed` → execute the plan
+- `✏️ Edit plan` → ask what to adjust (merge groups, split, rename message, move a file)
+- `❌ Cancel` → stop, do nothing
+
+Based on the user's selection:
+- **✅ Proceed** → execute the plan
+- **✏️ Edit plan** → ask what to adjust, update the plan, then show it again and ask with `AskUserQuestion` once more
+- **❌ Cancel** → stop, do nothing
 
 ### Step 5: Execute commits
 
