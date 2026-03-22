@@ -120,7 +120,8 @@ function getRateLimitDisplay(input) {
       if (i < pct) {
         circles += '●';
       } else {
-        circles += (pct - i + 1 > 0.4) ? '◐' : '○';
+        const mod = filled % 10;
+        circles += (mod > 4) ? '◐' : '○';
       }
     }
 
