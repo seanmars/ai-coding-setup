@@ -10,14 +10,14 @@ function getModelDisplay(input) {
   }
 
   // Green color
-  return `\x1b[38;5;207m[${model}]\x1b[0m`;
+  return `\uee0d \x1b[38;5;207m${model}\x1b[0m`;
 }
 
 function currentFolderName(cwd) {
   const dirName = path.basename(cwd);
 
   if (dirName) {
-    return `📁 \x1b[36m${dirName}\x1b[0m`;
+    return `\udb80\ude4b \x1b[36m${dirName}\x1b[0m`;
   }
 
   return '';
@@ -39,7 +39,7 @@ function getGitBranch(cwd) {
       encoding: 'utf8'
     }).trim();
 
-    return `🌴 \x1b[34m${branch}\x1b[0m`;
+    return `\ue725 \x1b[34m${branch}\x1b[0m`;
   } catch (e) {
     // Not a git repository or git command failed
     return '';
@@ -90,7 +90,7 @@ function contextUsed(input) {
   const leftBar = `${color}${'▓'.repeat(leftFilled)}${reset}${'░'.repeat(leftEmpty)}`;
   const rightBar = `${color}${'▓'.repeat(rightFilled)}${reset}${'░'.repeat(rightEmpty)}`;
 
-  const bar = `[${leftBar} ${color}${pctText}${reset} ${rightBar}]`;
+  const bar = `\udb80\ude38 ${color}${pctText}${reset}`;
 
   return bar;
 }
@@ -101,8 +101,8 @@ function getRateLimitDisplay(input) {
   }
 
   const windows = [
-    { key: 'five_hour', label: '5h' },
-    { key: 'seven_day', label: '7d' }
+    { key: 'five_hour', label: "\udb84\udfab" },
+    { key: 'seven_day', label: '\uf073' }
   ];
 
   const parts = [];
@@ -113,18 +113,7 @@ function getRateLimitDisplay(input) {
       continue;
     }
 
-    const filled = Math.floor(data.used_percentage || 0);
-    let circles = '';
-    const pct = Math.floor(filled / 10);
-    for (let i = 0; i < 10; i++) {
-      if (i < pct) {
-        circles += '●';
-      } else {
-        const mod = filled % 10;
-        const isFilled = filled >= (i * 10);
-        circles += (isFilled && (mod > 4)) ? '◐' : '○';
-      }
-    }
+    const filled = data.used_percentage || 0;
 
     let resetsStr = '';
     if (data.resets_at) {
@@ -133,7 +122,7 @@ function getRateLimitDisplay(input) {
       if (key === 'seven_day') {
         opt = { month: '2-digit', day: '2-digit', weekday: 'short', ...opt };
       }
-      resetsStr = ` ${resetDate.toLocaleTimeString([], opt)}`;
+      resetsStr = `${resetDate.toLocaleTimeString([], opt)}`;
     }
 
     let color;
@@ -146,10 +135,10 @@ function getRateLimitDisplay(input) {
     }
     const reset = '\x1b[0m';
 
-    parts.push(`${label}:${color}${circles}${reset}${resetsStr}(${filled}%)`);
+    parts.push(`${label}:${color}${filled}%${reset}[${resetsStr}]`);
   }
 
-  return parts.join(' |');
+  return parts.join(' ');
 }
 
 // Read JSON input from stdin
