@@ -4,6 +4,10 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const RESET = '\x1b[0m';
+const PINK = '\x1b[38;5;218m';
+const LIGHT_BLUE = '\x1b[38;5;153m';
+const MODEL_COLOR = '\x1b[38;5;222m';
+const YELLOW = '\x1b[38;5;226m';
 
 function getColor(pct, mid, high) {
   if (pct <= mid) return '\x1b[32m';
@@ -13,12 +17,12 @@ function getColor(pct, mid, high) {
 
 function getModelDisplay(input) {
   const model = input.model?.display_name ?? 'Unknown Model';
-  return `\uee0d \x1b[38;5;207m ${model}${RESET}`;
+  return `${MODEL_COLOR}\uee0d${RESET} \x1b[38;5;207m ${model}${RESET}`;
 }
 
 function currentFolderName(cwd) {
   const dirName = path.basename(cwd);
-  return dirName ? `\udb80\ude4b \x1b[36m${dirName}${RESET}` : '';
+  return dirName ? `${YELLOW}\udb80\ude4b${RESET} \x1b[36m${dirName}${RESET}` : '';
 }
 
 function getGitBranch(cwd) {
@@ -28,7 +32,7 @@ function getGitBranch(cwd) {
       stdio: 'pipe',
       encoding: 'utf8'
     }).trim();
-    return `\ue725 \x1b[34m${branch}${RESET}`;
+    return `\x1b[32m\ue725${RESET} \x1b[34m${branch}${RESET}`;
   } catch (e) {
     return '';
   }
@@ -37,7 +41,7 @@ function getGitBranch(cwd) {
 function contextUsed(input) {
   const pct = Math.floor(input.context_window?.used_percentage ?? 0);
   const color = getColor(pct, 50, 75);
-  return `\udb80\ude38 ${color}${pct}%${RESET}`;
+  return `${PINK}\udb80\ude38${RESET} ${color}${pct}%${RESET}`;
 }
 
 function getRateLimitDisplay(input) {
@@ -72,7 +76,7 @@ function getRateLimitDisplay(input) {
     }
 
     const color = getColor(filled, 33, 66);
-    parts.push(`${label} ${color}${filled}%${RESET} at ${resetsStr}`);
+    parts.push(`${LIGHT_BLUE}${label}${RESET} ${color}${filled}%${RESET} at ${resetsStr}`);
   }
 
   return parts.join(' ');
