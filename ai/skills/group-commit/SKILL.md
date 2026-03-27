@@ -45,6 +45,31 @@ For each changed file (new, modified, deleted, renamed), figure out:
 
 When in doubt, keep groups small rather than large. Two commits is better than one overstuffed one.
 
+### Step 2.5: Order groups by dependency (critical)
+
+Before writing commit messages, determine the safe commit order so that no commit references code that doesn't exist yet at that point in history.
+
+**For each pair of groups, ask:** if someone checks out only the first N commits, does the code compile / run without errors?
+
+**Dependency signals to check in the diffs:**
+- Group A **imports or requires** a module/type/function that is **newly added** in Group B → Group B must come before Group A
+- Group A **calls a function or uses a class** that is **renamed or refactored** in Group B → Group B must come before Group A
+- Group A **references a config key, env var, or migration** that is **introduced** in Group B → Group B must come before Group A
+- Group A modifies a **consumer** of an interface; Group B modifies the **interface itself** → Group B (interface) must come before Group A (consumer)
+- Test files that test new code → the feature code must be committed before (or in the same commit as) the tests
+
+**Algorithm — topological sort:**
+1. Build a directed graph: draw an edge from Group A → Group B if A depends on something introduced in B (meaning B must be committed first).
+2. Produce a topological order of groups with no incoming edges committed first.
+3. If a cycle is detected (A depends on B and B depends on A), the two groups **must be merged** into a single commit — flag this to the user and explain why.
+
+**General ordering heuristics (when explicit deps are unclear):**
+- Foundation first: shared utilities, base types, interfaces → before consumers
+- Config/env changes → before the code that reads them
+- Database migrations → before application code that uses the new schema
+- Dependency updates (`chore(deps)`) → before code that uses the new APIs
+- Core feature implementation → before tests, docs, and follow-up fixes that reference it
+
 ### Step 3: Determine conventional commit messages
 
 Use conventional commits format: `type(scope): description`
@@ -98,6 +123,19 @@ docs: update README with auth setup steps
   • README.md                   (modified)
 ```
 
+If any commit ordering was non-obvious (e.g., a dependency forced a specific order), add a brief note below the affected commit:
+```
+── Commit 1 ─────────────────────────────────────
+chore(deps): update axios to v1.7
+  • package.json                (modified)
+  • package-lock.json           (modified)
+  ⚠ must precede Commit 2 — new axios API used there
+
+── Commit 2 ─────────────────────────────────────
+feat(api): migrate requests to axios v1.7 syntax
+  • src/api/client.ts           (modified)
+```
+
 Then use the `AskUserQuestion` tool to ask for confirmation with these exact options:
 - `✅ Proceed` → execute the plan
 - `✏️ Edit plan` → ask what to adjust (merge groups, split, rename message, move a file)
@@ -147,6 +185,8 @@ After all commits, run `git log --oneline -N` (where N = number of commits made)
 
 **Merge conflicts / rebase in progress:** Check for these with `git status` first. If found, stop and tell the user to resolve conflicts before committing.
 
+**Circular dependency between groups:** If Group A depends on Group B and Group B also depends on Group A (a cycle), they cannot be safely split. Merge them into a single commit, explain the cycle to the user, and suggest the combined message.
+
 ## What NOT to do
 
 - Don't use `git add .` or `git add -A` — always add specific files per group
@@ -154,3 +194,4 @@ After all commits, run `git log --oneline -N` (where N = number of commits made)
 - Don't amend existing commits unless the user explicitly asks
 - Don't push — committing locally only unless told otherwise
 - Don't add unnecessary scope if it doesn't add clarity (`fix: correct typo` is fine without a scope)
+- Don't commit in an order where an earlier commit depends on code introduced in a later commit — always run the dependency sort in Step 2.5 before finalizing order
