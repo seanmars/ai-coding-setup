@@ -82,6 +82,13 @@ function getRateLimitDisplay(input) {
   return parts.join(' ');
 }
 
+function getTotalCostDisplay(input) {
+  if (!input.costs) return '';
+
+  const totalCost = input.costs.total_cost_usd || 0;
+  return `${YELLOW}\uf0d6${RESET} ${totalCost.toFixed(2)}`;
+}
+
 // Read JSON input from stdin
 let inputData = '';
 process.stdin.on('data', chunk => inputData += chunk);
@@ -98,13 +105,14 @@ process.stdin.on('end', () => {
 
     const statusContextUsed = contextUsed(input);
     const statusRateLimit = getRateLimitDisplay(input);
+    const statusTotalCost = getTotalCostDisplay(input);
 
     let output = firstLine;
-    const secondLineParts = [statusContextUsed, statusRateLimit].filter(Boolean);
+    const secondLineParts = [statusContextUsed, statusRateLimit, statusTotalCost].filter(Boolean);
     if (secondLineParts.length) {
       output += '\n' + secondLineParts.join(' ');
     }
-    
+
     console.log(output);
 
   } catch (error) {
