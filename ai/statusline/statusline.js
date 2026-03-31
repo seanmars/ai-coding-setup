@@ -83,10 +83,13 @@ function getRateLimitDisplay(input) {
 }
 
 function getTotalCostDisplay(input) {
-  if (!input.cost) return `${YELLOW}\uf0d6${RESET} $0.00`;
+  const moneySymbol = '\ued0b';
+  if (!input.cost) {
+    return `${YELLOW}${moneySymbol}${RESET} $0.00`;
+  }
 
   const totalCost = input.cost.total_cost_usd || 0;
-  return `${YELLOW}\uf0d6${RESET} $${totalCost.toFixed(2)}`;
+  return `${YELLOW}${moneySymbol}${RESET} $${totalCost.toFixed(2)}`;
 }
 
 // Read JSON input from stdin
@@ -102,16 +105,17 @@ process.stdin.on('end', () => {
 
     const folder = currentFolderName(cwd);
     const gitInfo = getGitBranch(cwd);
-
-    let firstLine = `${getModelDisplay(input)} | ${folder}`;
-    if (gitInfo) firstLine += ` | ${gitInfo}`;
-
     const statusContextUsed = contextUsed(input);
     const statusRateLimit = getRateLimitDisplay(input);
     const statusTotalCost = getTotalCostDisplay(input);
 
+    let firstLine = `${getModelDisplay(input)} | ${folder} | ${statusTotalCost}`;
+    if (gitInfo) {
+      firstLine += ` | ${gitInfo}`;
+    }
+
     let output = firstLine;
-    const secondLineParts = [statusContextUsed, statusRateLimit, statusTotalCost].filter(Boolean);
+    const secondLineParts = [statusContextUsed, statusRateLimit].filter(Boolean);
     if (secondLineParts.length) {
       output += '\n' + secondLineParts.join(' ');
     }
