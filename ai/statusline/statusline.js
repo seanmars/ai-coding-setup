@@ -83,10 +83,10 @@ function getRateLimitDisplay(input) {
 }
 
 function getTotalCostDisplay(input) {
-  if (!input.costs) return '';
+  if (!input.costs) return `${YELLOW}\uf0d6${RESET} $0.00`;
 
   const totalCost = input.costs.total_cost_usd || 0;
-  return `${YELLOW}\uf0d6${RESET} ${totalCost.toFixed(2)}`;
+  return `${YELLOW}\uf0d6${RESET} $${totalCost.toFixed(2)}`;
 }
 
 // Read JSON input from stdin
