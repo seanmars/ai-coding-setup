@@ -109,10 +109,11 @@ process.stdin.on('end', () => {
     const statusRateLimit = getRateLimitDisplay(input);
     const statusTotalCost = getTotalCostDisplay(input);
 
-    let firstLine = `${getModelDisplay(input)} | ${folder} | ${statusTotalCost}`;
+    let firstLine = `${getModelDisplay(input)} | ${folder}`;
     if (gitInfo) {
       firstLine += ` | ${gitInfo}`;
     }
+    firstLine += ` | ${statusTotalCost}`;
 
     let output = firstLine;
     const secondLineParts = [statusContextUsed, statusRateLimit].filter(Boolean);
