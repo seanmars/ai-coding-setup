@@ -62,21 +62,24 @@ function getRateLimitDisplay(input) {
 
     let resetsStr = '';
     if (data.resets_at) {
-      const resetDate = new Date(data.resets_at * 1000);
-      if (key === 'seven_day') {
-        const mm = String(resetDate.getMonth() + 1).padStart(2, '0');
-        const dd = String(resetDate.getDate()).padStart(2, '0');
-        const day = resetDate.toLocaleDateString([], { weekday: 'short' });
-        const hh = String(resetDate.getHours()).padStart(2, '0');
-        const min = String(resetDate.getMinutes()).padStart(2, '0');
-        resetsStr = `${mm}-${dd}(${day}) ${hh}:${min}`;
+      const diffMs = data.resets_at * 1000 - Date.now();
+      if (diffMs > 0) {
+        const totalMinutes = Math.ceil(diffMs / (1000 * 60));
+        const days = Math.floor(totalMinutes / (24 * 60));
+        const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+        const mins = totalMinutes % 60;
+        if (days > 0) {
+          resetsStr = `${days}d${hours}h${mins}m`;
+        } else {
+          resetsStr = `${hours}h${mins}m`;
+        }
       } else {
-        resetsStr = resetDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        resetsStr = '0h0m';
       }
     }
 
     const color = getColor(filled, 33, 66);
-    parts.push(`${LIGHT_BLUE}${label}${RESET} ${color}${filled}%${RESET} at ${resetsStr}`);
+    parts.push(`${LIGHT_BLUE}${label}${RESET} ${color}${filled}%${RESET} ${resetsStr}`);
   }
 
   return parts.join(' ');
@@ -85,7 +88,7 @@ function getRateLimitDisplay(input) {
 function getTotalCostDisplay(input) {
   const moneySymbol = '\ued0b';
   if (!input.cost) {
-    return `${YELLOW}${moneySymbol}${RESET} $0.00`;
+    return `${YELLOW}${moneySymbol}${RESET} $0.00!`;
   }
 
   const totalCost = input.cost.total_cost_usd || 0;
