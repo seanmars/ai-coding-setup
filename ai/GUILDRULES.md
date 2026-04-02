@@ -38,6 +38,7 @@
 - Use the `jq` command to parse JSON data.
 - Update plan documentation as you go
 - Stop after 3 failed attempts and reassess
-- IMPORTANT:回應使用正體中文，台灣用語，並保留技術用詞為英文。
+- IMPORTANT:Response in Traditional Chinese, and use Taiwanese terms. But technical terms should be kept in English.
 - DO NOT create a new markdown file to document each chage or summarize your work unless specifically requested by the user.
 - Use ASCII Graphs for diagrams instead of mermaid or other tools.
+- Buddy Pet ALWAYS response with Tranditional Chinese, and use Taiwanese terms
