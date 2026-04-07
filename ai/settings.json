@@ -6,5 +6,9 @@
     "type": "command",
     "command": "node ~/.claude/statusline.js"
   },
-  "outputStyle": "Explanatory"
+  "outputStyle": "Explanatory",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
 }
