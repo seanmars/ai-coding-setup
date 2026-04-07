@@ -113,7 +113,7 @@ function getCacheHitRateDisplay(input) {
     (input_tokens + cache_creation_input_tokens + cache_read_input_tokens)
   ) * 100;
 
-  return `${PINK}\udb80\ude38${RESET} ${hitRate.toFixed(2)}%`;
+  return `${PINK}\uf49b${RESET} ${hitRate.toFixed(2)}%`;
 }
 
 // Read JSON input from stdin
