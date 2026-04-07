@@ -95,6 +95,14 @@ function getTotalCostDisplay(input) {
   return `${YELLOW}${moneySymbol}${RESET} $${totalCost.toFixed(2)}`;
 }
 
+function getCacheHitRateDisplay(input) {
+  if (!input.cache) return '';
+
+  const { cache_read_input_tokens, input_tokens, cache_creation_input_tokens } = input.cache;
+  const hitRate = (cache_read_input_tokens / (input_tokens + cache_creation_input_tokens + cache_read_input_tokens)) * 100;
+  return `${PINK}\udb80\ude38${RESET} ${hitRate.toFixed(2)}%`;
+}
+
 // Read JSON input from stdin
 let inputData = '';
 process.stdin.on('data', chunk => inputData += chunk);
@@ -106,23 +114,30 @@ process.stdin.on('end', () => {
     const input = JSON.parse(inputData);
     const cwd = input.workspace.current_dir;
 
+    const sessionId = input.session_id;
+
     const folder = currentFolderName(cwd);
     const gitInfo = getGitBranch(cwd);
     const statusContextUsed = contextUsed(input);
     const statusRateLimit = getRateLimitDisplay(input);
     const statusTotalCost = getTotalCostDisplay(input);
+    const statusCacheHitRate = getCacheHitRateDisplay(input);
 
     let firstLine = `${getModelDisplay(input)} | ${folder}`;
     if (gitInfo) {
       firstLine += ` | ${gitInfo}`;
     }
     firstLine += ` | ${statusTotalCost}`;
+    firstLine += ` | ${statusCacheHitRate}`;
+
 
     let output = firstLine;
     const secondLineParts = [statusContextUsed, statusRateLimit].filter(Boolean);
     if (secondLineParts.length) {
       output += '\n' + secondLineParts.join(' ');
     }
+
+    output += '\n' + `${sessionId}`;
 
     console.log(output);
 
