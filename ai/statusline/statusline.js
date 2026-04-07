@@ -96,10 +96,23 @@ function getTotalCostDisplay(input) {
 }
 
 function getCacheHitRateDisplay(input) {
-  if (!input.cache) return '';
+  if (
+    !input.context_window ||
+    !input.context_window.current_usage) {
+    return '';
+  }
 
-  const { cache_read_input_tokens, input_tokens, cache_creation_input_tokens } = input.cache;
-  const hitRate = (cache_read_input_tokens / (input_tokens + cache_creation_input_tokens + cache_read_input_tokens)) * 100;
+
+  const {
+    cache_read_input_tokens,
+    input_tokens,
+    cache_creation_input_tokens
+  } = input.context_window.current_usage;
+  const hitRate = (
+    cache_read_input_tokens /
+    (input_tokens + cache_creation_input_tokens + cache_read_input_tokens)
+  ) * 100;
+
   return `${PINK}\udb80\ude38${RESET} ${hitRate.toFixed(2)}%`;
 }
 
