@@ -140,14 +140,16 @@ process.stdin.on('end', () => {
     if (gitInfo) {
       firstLine += ` | ${gitInfo}`;
     }
-    firstLine += ` | ${statusTotalCost}`;
-    firstLine += ` | ${statusCacheHitRate}`;
-
 
     let output = firstLine;
     const secondLineParts = [statusContextUsed, statusRateLimit].filter(Boolean);
     if (secondLineParts.length) {
       output += '\n' + secondLineParts.join(' ');
+    }
+
+    const thirdLineParts = [statusTotalCost, statusCacheHitRate].filter(Boolean);
+    if (thirdLineParts.length) {
+      output += '\n' + thirdLineParts.join(' ');
     }
 
     output += '\n' + `${sessionId}`;
