@@ -116,6 +116,15 @@ function getCacheHitRateDisplay(input) {
   return `${PINK}\uf49b${RESET} ${hitRate.toFixed(2)}%`;
 }
 
+const getVersionDisplay = (input) => {
+  const version = input.version;
+  if (!version) {
+    return 'v???';
+  }
+
+  return `v${version}`;
+};
+
 // Read JSON input from stdin
 let inputData = '';
 process.stdin.on('data', chunk => inputData += chunk);
@@ -129,6 +138,7 @@ process.stdin.on('end', () => {
 
     const sessionId = input.session_id;
 
+    const version = getVersionDisplay(input);
     const folder = currentFolderName(cwd);
     const gitInfo = getGitBranch(cwd);
     const statusContextUsed = contextUsed(input);
@@ -136,9 +146,9 @@ process.stdin.on('end', () => {
     const statusTotalCost = getTotalCostDisplay(input);
     const statusCacheHitRate = getCacheHitRateDisplay(input);
 
-    let firstLine = `${getModelDisplay(input)} | ${folder}`;
+    let firstLine = `${getModelDisplay(input)}|${version}|${folder}`;
     if (gitInfo) {
-      firstLine += ` | ${gitInfo}`;
+      firstLine += `|${gitInfo}`;
     }
 
     let output = firstLine;
