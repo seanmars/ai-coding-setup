@@ -12,5 +12,33 @@
   "attribution": {
     "commit": "",
     "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "WebFetch(*)",
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit",
+      "Write",
+      "Task(*)",
+      "mcp__*",
+      "Skill(*)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(rmdir *)",
+      "Bash(mv *)",
+      "Bash(del *)",
+      "Bash(shutdown *)",
+      "Bash(format *)",
+      "Bash(reboot *)"
+    ],
+    "ask": [
+      "Bash(git push --force *)",
+      "Bash(git rebase *)"
+    ]
   }
 }
