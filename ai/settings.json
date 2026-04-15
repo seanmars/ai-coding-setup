@@ -27,8 +27,7 @@
       "Skill(*)"
     ],
     "deny": [
-      "Bash(rm -rf *)",
-      "Bash(rm -r *)",
+      "Bash(rm *)",
       "Bash(rmdir *)",
       "Bash(mv *)",
       "Bash(del *)",
