@@ -16,7 +16,10 @@ function getColor(pct, mid, high) {
 }
 
 function getModelDisplay(input) {
-  const model = input.model?.display_name ?? 'Unknown Model';
+  let model = input.model?.display_name ?? 'Unknown Model';
+  model = model
+    .replace(/\s*context\s*/i, '')
+    .replace(/\s+/g, '');
   return `${MODEL_COLOR}\uee0d${RESET} \x1b[38;5;207m ${model}${RESET}`;
 }
 
