@@ -15,10 +15,9 @@
   "autoUpdatesChannel": "latest",
   "voiceEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "statusLine": {
-    "type": "command",
-    "command": "node ~/.claude/statusline.js"
-  },
+  "effortLevel": "high",
+  "advisorModel": "opus",
+  "autoMemoryEnabled": false,
   "permissions": {
     "allow": [
       "Bash(*)",
@@ -46,5 +45,9 @@
       "Bash(git push --force *)",
       "Bash(git rebase *)"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node ~/.claude/statusline.js"
   }
 }
