@@ -9,13 +9,13 @@
     "commit": "",
     "pr": ""
   },
-  "outputStyle": "Explanatory",
   "language": "English",
   "autoUpdatesChannel": "latest",
-  "voiceEnabled": false,
-  "skipAutoPermissionPrompt": true,
   "effortLevel": "high",
   "advisorModel": "opus",
+  "outputStyle": "Explanatory",
+  "voiceEnabled": false,
+  "skipAutoPermissionPrompt": true,
   "autoMemoryEnabled": false,
   "permissions": {
     "allow": [
