@@ -9,7 +9,6 @@
     "commit": "",
     "pr": ""
   },
-  "defaultShell": "powershell",
   "outputStyle": "Explanatory",
   "language": "English",
   "autoUpdatesChannel": "latest",
