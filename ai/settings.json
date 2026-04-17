@@ -1,17 +1,23 @@
 {
   "env": {
     "EDITOR": "code",
-    "MAX_THINKING_TOKENS": "10000",
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "100",
+    "MAX_THINKING_TOKENS": "20000"
   },
-  "statusLine": {
-    "type": "command",
-    "command": "node ~/.claude/statusline.js"
-  },
-  "outputStyle": "Explanatory",
   "attribution": {
     "commit": "",
     "pr": ""
+  },
+  "defaultShell": "powershell",
+  "outputStyle": "Explanatory",
+  "language": "English",
+  "autoUpdatesChannel": "latest",
+  "voiceEnabled": false,
+  "skipAutoPermissionPrompt": true,
+  "statusLine": {
+    "type": "command",
+    "command": "node ~/.claude/statusline.js"
   },
   "permissions": {
     "allow": [
@@ -24,7 +30,8 @@
       "Write",
       "Task(*)",
       "mcp__*",
-      "Skill(*)"
+      "Skill(*)",
+      "Monitor(*)"
     ],
     "deny": [
       "Bash(rm *)",
