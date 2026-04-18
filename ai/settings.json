@@ -11,7 +11,7 @@
   },
   "language": "English",
   "autoUpdatesChannel": "latest",
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "advisorModel": "opus",
   "outputStyle": "Explanatory",
   "voiceEnabled": false,
