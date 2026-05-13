@@ -35,7 +35,16 @@ function getGitBranch(cwd) {
       stdio: 'pipe',
       encoding: 'utf8'
     }).trim();
-    return `\x1b[32m\ue725${RESET} \x1b[34m${branch}${RESET}`;
+    let hash = '';
+    try {
+      hash = execSync('git --no-optional-locks rev-parse --short=8 HEAD', {
+        cwd,
+        stdio: 'pipe',
+        encoding: 'utf8'
+      }).trim();
+    } catch (e) {}
+    const branchLabel = hash ? `${branch}(${hash})` : branch;
+    return `\x1b[32m\ue725${RESET} \x1b[34m${branchLabel}${RESET}`;
   } catch (e) {
     return '';
   }
