@@ -1,10 +1,6 @@
 {
   "env": {
-    "EDITOR": "code",
-    "API_TIMEOUT_MS": "1200000",
-    "BASH_DEFAULT_TIMEOUT_MS": "300000",
-    "CLAUDE_CODE_NO_FLICKER": "1",
-    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1"
+    "EDITOR": "code"
   },
   "attribution": {
     "commit": "",
@@ -12,7 +8,6 @@
   },
   "outputStyle": "Explanatory",
   "language": "English",
-  "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "editorMode": "normal",
