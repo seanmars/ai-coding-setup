@@ -17,10 +17,11 @@ function getColor(pct, mid, high) {
 
 function getModelDisplay(input) {
   let model = input.model?.display_name ?? 'Unknown Model';
+  let effort = input.effort.level;
   model = model
     .replace(/\s*context\s*/i, '')
     .replace(/\s+/g, '');
-  return `${MODEL_COLOR}\uee0d${RESET} \x1b[38;5;207m ${model}${RESET}`;
+  return `${MODEL_COLOR}\uee0d${RESET} \x1b[38;5;207m ${model}[${effort}]${RESET}`;
 }
 
 function currentFolderName(cwd) {

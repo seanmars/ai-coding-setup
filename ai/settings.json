@@ -1,9 +1,10 @@
 {
   "env": {
     "EDITOR": "code",
-    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "100",
-    "MAX_THINKING_TOKENS": "20000"
+    "API_TIMEOUT_MS": "1200000",
+    "BASH_DEFAULT_TIMEOUT_MS": "300000",
+    "CLAUDE_CODE_NO_FLICKER": "1",
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1"
   },
   "attribution": {
     "commit": "",
@@ -11,14 +12,20 @@
   },
   "outputStyle": "Explanatory",
   "language": "English",
-  "effortLevel": "xhigh",
-  "advisorModel": "opus",
+  "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "editorMode": "normal",
-  "autoCompactEnabled": false,
+  "verbose": false,
+  "preferredNotifChannel": "auto",
+  "autoCompactEnabled": true,
+  "showTurnDuration": true,
+  "terminalProgressBarEnabled": true,
   "remoteControlAtStartup": false,
+  "inputNeededNotifEnabled": false,
+  "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
+  "useAutoModeDuringPlan": true,
   "voiceEnabled": false,
   "disableArtifact": true,
   "disableWorkflows": true,
