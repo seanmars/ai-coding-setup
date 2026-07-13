@@ -20,6 +20,9 @@
   "remoteControlAtStartup": false,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": false,
+  "disableArtifact": true,
+  "disableWorkflows": true,
+  "workflowKeywordTriggerEnabled": false,
   "worktree": {
     "baseRef": "fresh"
   },
