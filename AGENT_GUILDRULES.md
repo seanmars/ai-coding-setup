@@ -1,7 +1,18 @@
-# CLAUDE
+# Agent Guild Rules
 
-- **IMPORTANT**: 所有回應一律使用正體中文台灣用語，只保留技術詞彙使用英文，且不使用全形符號。
-- **IMPORTANT**: 回應內容請盡量簡潔，避免過度說明或冗長的使用說明，除非使用者特別要求。
+## Response Guidelines
+
+- 所有回應一律使用正體中文台灣用語,只保留技術詞彙使用英文.
+- 一律使用半形符號,不使用全形符號: "," "." ";" ":" "!" "?" "(" ")" 而不是 "，" "。" "；" "：" "！" "？" "（" "）".
+- 除了 output style 要求的 Insight 區塊外,回應內容請盡量簡潔,避免過度說明或冗長的使用說明,除非使用者特別要求.
+- 有修改檔案的任務,結尾用三個標題做摘要: `待我處理`, `已修改`, `發現`.
+
+## Working Mode
+
+- When a step doesn't need my input, keep going. Put status notes in the same message as your next action.
+- Stop and ask only when you can't continue without me, or before anything destructive: deleting data, force-pushing, or changing anything outside this repository.
+- Done means: the code builds, related tests pass, and no test was disabled or skipped to get there.
+- After 3 failed attempts at the same problem, stop and reassess the approach.
 
 ## Philosophy
 
@@ -19,43 +30,30 @@
 - No clever tricks - choose the boring solution
 - If you need to explain it, it's too complex
 
-## Important Reminders
+## Rules
 
-**NEVER**:
-
-- IMPORTANT: DO NOT USEING 全形符號, 永遠使用半形符號. ex:
-  - "，" should be ","
-  - "。" should be "."
-  - "；" should be ";"
-  - "：" should be ":"
-  - "！" should be "!"
-  - "？" should be "?"
-  - "（" should be "("
-  - "）" should be ")"
-- Use `--no-verify` to bypass commit hooks
-- Disable tests instead of fixing them
-- Commit code that doesn't compile
-- Make assumptions - verify with existing code
-**ALWAYS**:
-- Update plan documentation as you go
-- Stop after 3 failed attempts and reassess
-- DO NOT create a new markdown file to document each chage or summarize your work unless specifically requested by the user.
+- Don't use `--no-verify` to bypass commit hooks.
+- Fix failing tests instead of disabling them.
+- Don't commit code that doesn't compile.
+- Verify assumptions against existing code instead of guessing.
+- Update plan documentation as you go.
+- Don't create a new markdown file to document each change unless I ask for it.
 
 ## Documentation
 
-When writing documentation or README content, use Traditional Chinese (繁體中文) unless otherwise specified. Keep descriptions concise — avoid over-documenting with verbose usage details.
+When writing documentation or README content, use Traditional Chinese (繁體中文) unless otherwise specified. Keep descriptions concise - avoid over-documenting with verbose usage details.
 
-## Tooling for shell interactions (Install if missing)
+## Tooling for shell interactions
 
-Is it about finding FILES? use 'fd'
-Is it about finding TEXT/strings? use 'rg'
-Is it about finding CODE STRUCTURE? use 'ast-grep'
-Is it about SELECTING from multiple results? pipe to 'fzf'
-Is it about interacting with JSON? use 'jq'
-Is it about interacting with YAML or XML? use 'yq'
+If a tool below is missing, ask me before installing it.
 
-- You run in an environment where `ast-grep` is available; whenever a search requires syntax-aware or structural matching, default to `ast-grep --lang rust -p '<pattern>'` (or set `--lang` appropriately) and avoid falling back to text-only tools like `rg` or `grep` unless I explicitly request a plain-text search.
+- Finding FILES: `fd`
+- Finding TEXT/strings: `rg`
+- Finding CODE STRUCTURE: `ast-grep` (set `--lang` to the project's language, e.g. `--lang csharp -p '<pattern>'`)
+- SELECTING from multiple results: pipe to `fzf`
+- JSON: `jq`
+- YAML or XML: `yq`
 
-## NOTES
+## Notes
 
-- 如果有切換到其他目錄(cd to other directory)結束動作後一定要切換回到主目錄(cd back to session start directory)，以免影響後續動作。
+- 如果有切換到其他目錄 (cd to other directory),結束動作後要切換回到主目錄 (cd back to session start directory),以免影響後續動作.
