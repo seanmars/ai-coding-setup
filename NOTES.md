@@ -1,5 +1,16 @@
 # Notes
 
+## Claude
+
+### `AskUserQuestion`
+
+```text
+Prompt the user for input or confirmation
+
+How It Works:
+Presents a question to the user and waits for a response. Used for disambiguation, confirmation of destructive actions, or gathering information Claude can't infer.
+```
+
 ## Markdown Front Matter(frontmatter)
 
 在 Markdown 文件的最頂端，由 `---` 包圍的區塊通常被稱為 YAML Front Matter(或者是簡稱為 Front Matter)。它是一種用於在 Markdown 文件中嵌入元數據(metadata)的格式，通常使用 YAML 語法來定義這些元數據。
