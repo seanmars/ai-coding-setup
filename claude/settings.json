@@ -1,21 +1,40 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
     "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS": "1",
-    "EDITOR": "code"
+    "EDITOR": "code --wait",
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1"
   },
   "attribution": {
     "commit": "",
-    "pr": ""
+    "pr": "",
+    "sessionUrl": false
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "disableClaudeAiConnectors": true,
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "disableWorkflows": true,
+  "disableArtifact": true,
+  "workflowKeywordTriggerEnabled": false,
   "outputStyle": "Explanatory",
   "language": "台灣正體中文(zh-tw)",
+  "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "autoMemoryEnabled": true,
   "skipWorkflowUsageWarning": true,
+  "theme": "dark",
   "editorMode": "normal",
   "verbose": false,
   "preferredNotifChannel": "auto",
@@ -31,12 +50,6 @@
   "skipAutoPermissionPrompt": true,
   "useAutoModeDuringPlan": true,
   "voiceEnabled": false,
-  "worktree": {
-    "baseRef": "fresh"
-  },
-  "disableWorkflows": true,
-  "disableArtifact": true,
-  "workflowKeywordTriggerEnabled": false,
   "hooks": {},
   "permissions": {
     "allow": [
@@ -45,9 +58,7 @@
       "Read",
       "Glob",
       "Grep",
-      "Edit",
-      "Write",
-      "Task(*)",
+      "Agent",
       "Skill(*)",
       "Monitor(*)",
       "WebSearch",
@@ -56,6 +67,12 @@
       "PowerShell(dotnet test *)",
       "PowerShell(openspec validate *)",
       "PowerShell(openspec list *)",
+      "PowerShell(git status*)",
+      "PowerShell(git diff*)",
+      "PowerShell(git log*)",
+      "PowerShell(git show*)",
+      "PowerShell(rg *)",
+      "PowerShell(fd *)",
       "mcp__pencil"
     ],
     "deny": [
@@ -66,8 +83,8 @@
       "Bash(sudo *)",
       "Bash(chmod 777 *)",
       "Bash(format *)",
-      "Read(.env)",
       "Read(**/.env)",
+      "Read(**/.env.*)",
       "Read(**/credentials*)",
       "Read(**/*.pem)",
       "Read(**/*.key)"
@@ -78,7 +95,6 @@
       "Bash(mv *)",
       "Bash(del *)",
       "Bash(shutdown *)",
-      "Bash(format *)",
       "Bash(reboot *)",
       "Bash(git push --force*)",
       "Bash(git push -f*)",

@@ -1,4 +1,4 @@
-# Agent Guild Rules
+# CLAUDE
 
 ## Response Guidelines
 
@@ -10,7 +10,7 @@
 ## Working Mode
 
 - When a step doesn't need my input, keep going. Put status notes in the same message as your next action.
-- Stop and ask only when you can't continue without me, or before anything destructive: deleting data, force-pushing, or changing anything outside this repository.
+- Stop and ask only when you can't continue without me, or before anything destructive: deleting data, force-pushing, or changing anything outside the working directory.
 - Done means: the code builds, related tests pass, and no test was disabled or skipped to get there.
 - After 3 failed attempts at the same problem, stop and reassess the approach.
 
@@ -36,7 +36,7 @@
 - Fix failing tests instead of disabling them.
 - Don't commit code that doesn't compile.
 - Verify assumptions against existing code instead of guessing.
-- Update plan documentation as you go.
+- If an openspec change is in progress, check off its `tasks.md` as steps complete; otherwise keep any existing plan document in sync.
 - Don't create a new markdown file to document each change unless I ask for it.
 
 ## Documentation
@@ -50,7 +50,7 @@ If a tool below is missing, ask me before installing it.
 - Finding FILES: `fd`
 - Finding TEXT/strings: `rg`
 - Finding CODE STRUCTURE: `ast-grep` (set `--lang` to the project's language, e.g. `--lang csharp -p '<pattern>'`)
-- SELECTING from multiple results: pipe to `fzf`
+- SELECTING from multiple results: pipe to `fzf --filter '<query>'` (non-interactive; plain `fzf` needs a TTY)
 - JSON: `jq`
 - YAML or XML: `yq`
 
