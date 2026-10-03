@@ -4,6 +4,7 @@
 """
 
 import shutil
+from datetime import datetime
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parent / "AGENTS.md"
@@ -19,6 +20,13 @@ def main() -> None:
         return
 
     TARGET.parent.mkdir(parents=True, exist_ok=True)
+
+    if TARGET.is_file():
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        backup = TARGET.with_name(f"{TARGET.stem}_{timestamp}{TARGET.suffix}")
+        shutil.copy2(TARGET, backup)
+        print(f"已備份: {backup}")
+
     shutil.copyfile(SOURCE, TARGET)
     print(f"已同步: {SOURCE} -> {TARGET}")
 
