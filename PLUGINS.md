@@ -1,0 +1,3 @@
+# Plugins
+
+- `/plugin enable cc-plugin-you-should-know@builtin`
