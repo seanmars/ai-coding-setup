@@ -32,7 +32,7 @@
   },
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
-  "autoMemoryEnabled": true,
+  "autoMemoryEnabled": false,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "editorMode": "normal",
@@ -84,10 +84,6 @@
       "mcp__pencil"
     ],
     "deny": [
-      "Bash(rm -rf *)",
-      "Bash(rm -r *)",
-      "Bash(rmdir /s *)",
-      "Bash(del /s *)",
       "Bash(sudo *)",
       "Bash(chmod 777 *)",
       "Bash(format *)",
@@ -98,6 +94,10 @@
       "Read(**/*.key)"
     ],
     "ask": [
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(rmdir /s *)",
+      "Bash(del /s *)",
       "Bash(rm *)",
       "Bash(rmdir *)",
       "Bash(mv *)",
