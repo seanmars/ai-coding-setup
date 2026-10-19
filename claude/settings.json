@@ -50,6 +50,7 @@
   "skipAutoPermissionPrompt": true,
   "useAutoModeDuringPlan": true,
   "voiceEnabled": false,
+  "idleCompaction": false,
   "askUserQuestionTimeout": "never",
   "pluginConfigs": {
     "agents-md@builtin": {
