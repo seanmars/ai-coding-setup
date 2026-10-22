@@ -17,11 +17,11 @@ function getColor(pct, mid, high) {
 
 function getModelDisplay(input) {
   let model = input.model?.display_name ?? 'Unknown Model';
-  let effort = input.effort.level;
+  let effortLevel = input.effort.level;
   model = model
     .replace(/\s*context\s*/i, '')
     .replace(/\s+/g, '');
-  return `${MODEL_COLOR}\uee0d${RESET} \x1b[38;5;207m ${model}[${effort}]${RESET}`;
+  return `${MODEL_COLOR}\uee0d${RESET} \x1b[38;5;207m ${model}[${effortLevel}]${RESET}`;
 }
 
 function currentFolderName(cwd) {
@@ -170,12 +170,10 @@ process.stdin.on('end', () => {
       output += '\n' + secondLineParts.join(' ');
     }
 
-    const thirdLineParts = [statusTotalCost, statusCacheHitRate].filter(Boolean);
+    const thirdLineParts = [statusTotalCost, statusCacheHitRate, `[${sessionId}]`].filter(Boolean);
     if (thirdLineParts.length) {
       output += '\n' + thirdLineParts.join(' ');
     }
-
-    output += '\n' + `${sessionId}`;
 
     console.log(output);
 
