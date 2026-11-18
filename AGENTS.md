@@ -42,6 +42,7 @@
 
 ## Rules
 
+- Don't leave comments in code that explain what the code does; instead, make the code self-explanatory. If the linter check fails because of this, ask the user to modify the linter settings to turn off all annotation checks.
 - Don't use `--no-verify` to bypass commit hooks.
 - Fix failing tests instead of disabling them.
 - Don't commit code that doesn't compile.
